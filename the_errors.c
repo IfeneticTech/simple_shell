@@ -1,6 +1,5 @@
 #include "shell.h"
 
-
 /**
  * _eputs - function that prints an input string.
  * @str: the string to be printed.
@@ -9,18 +8,16 @@
  */
 void _eputs(char *str)
 {
-    int y = 0;
+	int y = 0;
 
-
-    if (!str)
-        return;
-    while (str[y] != '\0')
-    {
-        _eputchar(str[y]);
-        y++;
-    }
+	if (!str)
+		return;
+	while (str[y] != '\0')
+	{
+		_eputchar(str[y]);
+		y++;
+	}
 }
-
 
 /**
  * _eputchar - function that writes the character c to stderr.
@@ -31,20 +28,18 @@ void _eputs(char *str)
  */
 int _eputchar(char c)
 {
-    static int y;
-    static char buf[WRITE_BUF_SIZE];
+	static int y;
+	static char buf[WRITE_BUF_SIZE];
 
-
-    if (c == BUF_FLUSH || y >= WRITE_BUF_SIZE)
-    {
-        write(2, buf, y);
-        y = 0;
-    }
-    if (c != BUF_FLUSH)
-        buf[y++] = c;
-    return (1);
+	if (c == BUF_FLUSH || y >= WRITE_BUF_SIZE)
+	{
+		write(2, buf, y);
+		y = 0;
+	}
+	if (c != BUF_FLUSH)
+		buf[y++] = c;
+	return (1);
 }
-
 
 /**
  * _putfd - function that writes the character c to given fd.
@@ -54,22 +49,21 @@ int _eputchar(char c)
  * Return: on success 1.
  * on error, -1 is returned, and errno is set appropriately.
  */
+
 int _putfd(char c, int fd)
 {
-    static int y;
-    static char buf[WRITE_BUF_SIZE];
+	static int y;
+	static char buf[WRITE_BUF_SIZE];
 
-
-    if (c == BUF_FLUSH || y >= WRITE_BUF_SIZE)
-    {
-        write(fd, buf, y);
-        y = 0;
-    }
-    if (c != BUF_FLUSH)
-        buf[y++] = c;
-    return (1);
+	if (c == BUF_FLUSH || y >= WRITE_BUF_SIZE)
+	{
+		write(fd, buf, y);
+		y = 0;
+	}
+	if (c != BUF_FLUSH)
+		buf[y++] = c;
+	return (1);
 }
-
 
 /**
  * _putsfd - function that prints an input string.
@@ -78,17 +72,16 @@ int _putfd(char c, int fd)
  *
  * Return: the number of chars put.
  */
+
 int _putsfd(char *str, int fd)
 {
-    int y = 0;
+	int y = 0;
 
-
-    if (!str)
-        return (0);
-    while (*str)
-    {
-        y += _putfd(*str++, fd);
-    }
-    return (y);
+	if (!str)
+		return (0);
+	while (*str)
+	{
+		y += _putfd(*str++, fd);
+	}
+	return (y);
 }
-
